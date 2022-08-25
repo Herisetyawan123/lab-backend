@@ -1,7 +1,6 @@
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-
-dotenv.config()
+const mongoose = require('mongoose')
+// eslint-disable-next-line no-unused-vars
+const dotenv = require('dotenv').config()
 const connection = {
 }
 
@@ -11,6 +10,7 @@ async function dbConnect () {
     useUnifiedTopology: true
   })
   connection.isConncected = db.connection.readyState
+  console.log('database connection')
 }
 
-export default dbConnect
+module.exports = dbConnect
