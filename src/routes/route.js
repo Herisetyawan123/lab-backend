@@ -1,4 +1,8 @@
-// const express = require('express')
-// const route = express.Router()
+const express = require('express')
+const router = express.Router()
 
-// const mahasiswaController = require('../controllers/mahasiswaController')
+// router.use(require('./task'))
+router.use(require('./kelas'))
+// router.use(require('./mahasiswa'))
+
+module.exports = router
