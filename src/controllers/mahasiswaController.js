@@ -3,10 +3,10 @@ const encrypt = require('../helpers/encrypt')
 
 exports.getMahasiswa = async (req, res) => {
   try {
-    const getMahasiswa = await Mahasiswa.find()
+    const results = await Mahasiswa.find()
     res.status(200).json({
       message: 'Success',
-      getMahasiswa
+      results
     })
   } catch (error) {
     res.status(500).json({
@@ -18,10 +18,10 @@ exports.getMahasiswa = async (req, res) => {
 
 exports.getMahasiswaById = async (req, res) => {
   try {
-    const getMahasiswaById = await Mahasiswa.findById(req.params.id)
+    const results = await Mahasiswa.findById(req.params.id)
     res.status(200).json({
       message: 'Success',
-      getMahasiswaById
+      results
     })
   } catch (error) {
     res.status(500).json({
