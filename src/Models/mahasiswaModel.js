@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
+const encrypt = require('../helpers/encrypt')
 
 const mahasiswaSchema = new Schema({
   nama: {
@@ -13,6 +14,10 @@ const mahasiswaSchema = new Schema({
   role: {
     type: String, default: 'participants'
   },
+  password: {
+    type: String,
+    default: encrypt.cryptPassword('12345678')
+  },
   tugas: [{
     type: Schema.Types.ObjectId,
     ref: 'Task'
@@ -20,10 +25,7 @@ const mahasiswaSchema = new Schema({
   kelas: [{
     type: Schema.Types.ObjectId,
     ref: 'Kelas'
-  }],
-  password: {
-    type: String
-  }
+  }]
 })
 const Mahasiswa = mongoose.model('Mahasiswa', mahasiswaSchema)
 

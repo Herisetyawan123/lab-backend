@@ -1,13 +1,15 @@
+/* eslint-disable camelcase */
 const Kelas = require('../Models/kelasModel')
 
 exports.getKelas = async (req, res) => {
   try {
-    const kelas = await Kelas.find()
+    const kelas = await Kelas.find().populate({ path: 'partisipan' }).populate({ path: 'pengampu' })
     res.status(200).json({
       message: 'Success',
       kelas
     })
   } catch (error) {
+    console.error(error)
     res.status(500).json({
       message: 'Internal server Error',
       error
@@ -31,8 +33,11 @@ exports.getKelasById = async (req, res) => {
 }
 
 exports.addKelas = async (req, res) => {
+  const { nama_kelas, jadwal, hari, tugas, partisipan, pengampu, status } = req.body
+  const participants = []
+  participants.push(partisipan)
   try {
-    const kelas = await Kelas.create(req.body)
+    const kelas = await Kelas.create({ nama_kelas, jadwal, hari, tugas, partisipan: participants, pengampu, status })
     res.status(201).json({
       message: 'Success', kelas
     })

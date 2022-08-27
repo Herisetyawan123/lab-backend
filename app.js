@@ -6,12 +6,16 @@ const route = require('./src/routes/route')
 const bodyParser = require('body-parser')
 const DBconnect = require('./src/utils/dbConnect')
 
+// call DB
 DBconnect()
+
 // allow origin
 app.use(cors())
+
 // return only json parse
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
 // access route
 app.use('/api', route)
 
