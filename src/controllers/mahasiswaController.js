@@ -34,7 +34,7 @@ exports.getMahasiswaById = async (req, res) => {
 exports.addMahasiswa = async (req, res) => {
   const { nama, nim, role, password, tugas, kelas } = req.body
   try {
-    const addMahasiswa = Mahasiswa.create({ nama, nim, role, password: encrypt.cryptPassword(password), tugas, kelas })
+    const addMahasiswa = await Mahasiswa.create({ nama, nim, role, password: encrypt.cryptPassword(password), tugas, kelas })
     res.status(201).json({
       message: 'Success',
       addMahasiswa
@@ -56,7 +56,8 @@ exports.editMahasiswa = async (req, res) => {
     })
   }
   try {
-    const editMahasiswa = await Mahasiswa.updateOne({ _id: req.params.id }, { $set: req.body })
+    const { nama, nim, role, password, tugas, kelas } = req.body
+    const editMahasiswa = await Mahasiswa.updateOne({ _id: req.params.id }, { $set: { nama, nim, role, password: encrypt.cryptPassword(password), tugas, kelas } })
     res.status(200).json({
       message: 'Success',
       editMahasiswa
