@@ -4,6 +4,7 @@ const dotenv = require('dotenv').config()
 const connection = {
 }
 
+// function for connect to mongodb database
 async function dbConnect () {
   const db = await mongoose.connect(process.env.CONNECT_STRING, {
     useNewUrlParser: true,
