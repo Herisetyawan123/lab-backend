@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 
+// create encrypt password
 const encrypt = {
   cryptPassword: (password) => {
     const salt = bcrypt.genSaltSync(10)
