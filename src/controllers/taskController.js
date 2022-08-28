@@ -66,8 +66,6 @@ exports.editTask = async (req, res) => {
   }
   const { nama_tugas, kelas, url, deadline, status, mahasiswa } = req.body
   const mahasiswas = idTask.mahasiswa
-  console.log(mahasiswas)
-  console.log(mahasiswas.includes(mahasiswa))
   if (mahasiswas.includes(mahasiswa)) {
     return res.status(405).json({
       message: 'data mahasiswa is alredy exist'

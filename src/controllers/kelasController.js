@@ -92,17 +92,92 @@ exports.deleteKelas = async (req, res) => {
   }
 }
 
-// exports.addPartisipan = async (req, res) => {
-//   const idKelas = await Kelas.findById(req.params.id)
-//   if (!idKelas) {
-//     return res.status(400).json({
-//       message: 'Fail, id not found'
-//     })
-//   }
+exports.addPartisipan = async (req, res) => {
+  const idKelas = await Kelas.findById(req.params.id)
+  if (!idKelas) {
+    return res.status(400).json({
+      message: 'Fail, id not found'
+    })
+  }
 
-//   try {
-//     const { partisipan } = 
-//   } catch (error) {
-    
-//   }
-// }
+  try {
+    const { partisipan } = req.body
+    const participants = idKelas.partisipan
+    if (participants.includes(partisipan)) {
+      return res.status(405).json({
+        message: 'participant is already exist'
+      })
+    }
+    participants.push(partisipan)
+    const addPartisipan = await Kelas.updateOne({ _id: req.params.id }, { $set: { partisipan: participants } })
+    res.status(201).json({
+      message: 'Success',
+      result: addPartisipan
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: 'internal server error',
+      error
+    })
+  }
+}
+
+exports.addPengampu = async (req, res) => {
+  const idKelas = await Kelas.findById(req.params.id)
+  if (!idKelas) {
+    return res.status(400).json({
+      message: 'Fail, id not found'
+    })
+  }
+
+  try {
+    const { pengampu } = req.body
+    const pengampus = idKelas.pengampu
+    if (pengampus.includes(pengampu)) {
+      return res.status(405).json({
+        message: 'participant is already exist'
+      })
+    }
+    pengampus.push(pengampu)
+    const addPengampu = await Kelas.updateOne({ _id: req.params.id }, { $set: { pengampu: pengampus } })
+    res.status(201).json({
+      message: 'Success',
+      result: addPengampu
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: 'internal server error',
+      error
+    })
+  }
+}
+
+exports.addTugas = async (req, res) => {
+  const idKelas = await Kelas.findById(req.params.id)
+  if (!idKelas) {
+    return res.status(400).json({
+      message: 'Fail, id not found'
+    })
+  }
+
+  try {
+    const { tugas } = req.body
+    const tugass = idKelas.tugas
+    if (tugass.includes(tugas)) {
+      return res.status(405).json({
+        message: 'Tugas is already exist'
+      })
+    }
+    tugass.push(tugas)
+    const addTugas = await Kelas.updateOne({ _id: req.params.id }, { $set: { tugas: tugass } })
+    res.status(201).json({
+      message: 'Success',
+      result: addTugas
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: 'internal server error',
+      error
+    })
+  }
+}
