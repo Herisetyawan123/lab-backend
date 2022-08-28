@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
+// create collection Task
 const taskSchema = new Schema({
   nama_tugas: {
     type: String,

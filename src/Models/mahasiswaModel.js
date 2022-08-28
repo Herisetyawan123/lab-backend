@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 const encrypt = require('../helpers/encrypt')
 
+// create collection Mahasiswa
 const mahasiswaSchema = new Schema({
   nama: {
     type: String,

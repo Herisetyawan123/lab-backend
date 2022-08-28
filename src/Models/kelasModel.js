@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
+// create collection Kelas
 const kelasSchema = new Schema({
   nama_kelas: {
     type: String,
