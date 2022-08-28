@@ -18,10 +18,15 @@ exports.getMahasiswa = async (req, res) => {
 
 exports.getMahasiswaById = async (req, res) => {
   try {
-    const results = await Mahasiswa.findById(req.params.id)
+    const result = await Mahasiswa.findById(req.params.id)
+    if (!result) {
+      return res.status(400).json({
+        message: 'Fail, Id not found'
+      })
+    }
     res.status(200).json({
       message: 'Success',
-      results
+      result
     })
   } catch (error) {
     res.status(500).json({
@@ -37,7 +42,7 @@ exports.addMahasiswa = async (req, res) => {
     const addMahasiswa = await Mahasiswa.create({ nama, nim, role, password: encrypt.cryptPassword(password), tugas, kelas })
     res.status(201).json({
       message: 'Success',
-      addMahasiswa
+      result: addMahasiswa
     })
   } catch (error) {
     res.status(500).json({
@@ -60,7 +65,7 @@ exports.editMahasiswa = async (req, res) => {
     const editMahasiswa = await Mahasiswa.updateOne({ _id: req.params.id }, { $set: { nama, nim, role, password: encrypt.cryptPassword(password), tugas, kelas } })
     res.status(200).json({
       message: 'Success',
-      editMahasiswa
+      result: editMahasiswa
     })
   } catch (error) {
     res.status(500).json({
@@ -81,7 +86,7 @@ exports.deleteMahasiswa = async (req, res) => {
     const deleteMahasiswa = await Mahasiswa.deleteOne({ _id: req.params.id })
     res.status(200).json({
       message: 'Success',
-      deleteMahasiswa
+      result: deleteMahasiswa
     })
   } catch (error) {
     res.status(500).json({

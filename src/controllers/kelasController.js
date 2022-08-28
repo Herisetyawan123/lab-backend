@@ -91,3 +91,18 @@ exports.deleteKelas = async (req, res) => {
     })
   }
 }
+
+// exports.addPartisipan = async (req, res) => {
+//   const idKelas = await Kelas.findById(req.params.id)
+//   if (!idKelas) {
+//     return res.status(400).json({
+//       message: 'Fail, id not found'
+//     })
+//   }
+
+//   try {
+//     const { partisipan } = 
+//   } catch (error) {
+    
+//   }
+// }
