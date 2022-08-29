@@ -3,7 +3,7 @@ const Kelas = require('../Models/kelasModel')
 
 exports.getKelas = async (req, res) => {
   try {
-    const results = await Kelas.find().populate({ path: 'partisipan' }).populate({ path: 'pengampu' })
+    const results = await Kelas.find().populate({ path: 'partisipan' }).populate({ path: 'pengampu' }).populate({ path: 'tugas' })
     res.status(200).json({
       message: 'Success',
       results
@@ -19,7 +19,7 @@ exports.getKelas = async (req, res) => {
 
 exports.getKelasById = async (req, res) => {
   try {
-    const results = await Kelas.findById(req.params.id)
+    const results = await Kelas.findById(req.params.id).populate({ path: 'partisipan' }).populate({ path: 'pengampu' }).populate({ path: 'tugas' })
     res.status(200).json({
       message: 'Success',
       results
