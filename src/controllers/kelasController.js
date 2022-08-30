@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 const Kelas = require('../Models/kelasModel')
+const Mahasiswa = require('../Models/mahasiswaModel')
 
 exports.getKelas = async (req, res) => {
   try {
@@ -132,6 +133,13 @@ exports.addPengampu = async (req, res) => {
 
   try {
     const { pengampu } = req.body
+    const idMahiswa = await Mahasiswa.findById(pengampu)
+    if (idMahiswa.role === 'participants') {
+      return res.status(400).json({
+        message: 'Mahasiswa bukan pengampu'
+      })
+    }
+
     const pengampus = idKelas.pengampu
     if (pengampus.includes(pengampu)) {
       return res.status(405).json({
