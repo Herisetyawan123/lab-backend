@@ -19,6 +19,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // access route
 app.use('/api', route)
+app.get('/', (req, res) => {
+  res.send('Hello world')
+})
 
 // add port on .env
 const port = process.env.PORT || 3000
