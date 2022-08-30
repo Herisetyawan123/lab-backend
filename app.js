@@ -19,8 +19,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // access route
 app.use('/api', route)
+// route awal
 app.get('/', (req, res) => {
-  res.send('Hello world')
+  res.send('Hello Selamat Datang Back-End Lab, untuk mengakses data gunakan route https://back-en-lab.herokuapp.com/api/kelas || https://back-en-lab.herokuapp.com/api/mahasiswa || https://back-en-lab.herokuapp.com/api/task')
 })
 
 // add port on .env
