@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable camelcase */
 const Kelas = require('../Models/kelasModel')
 const Mahasiswa = require('../Models/mahasiswaModel')
@@ -186,6 +187,34 @@ exports.addTugas = async (req, res) => {
     res.status(500).json({
       message: 'internal server error',
       error
+    })
+  }
+}
+
+exports.deletePartisipan = async (req, res) => {
+  const idKelas = await Kelas.findById(req.params.id)
+  if (!idKelas) {
+    return res.status(400).json({
+      message: 'Fail, id not found'
+    })
+  }
+  try {
+    const { partisipan } = req.body
+    const searchParticipant = idKelas.partisipan
+    if (!searchParticipant.includes(partisipan)) {
+      return res.status(400).json({
+        message: 'Fail, partisipan not found'
+      })
+    }
+    const filterPartisipan = searchParticipant.filter((partisipanDel) => partisipanDel != partisipan)
+    const deletePartisipan = await Kelas.updateOne({ _id: req.params.id }, { $set: { partisipan: filterPartisipan } })
+    res.status(200).json({
+      message: 'Success',
+      result: deletePartisipan
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: 'internal server error'
     })
   }
 }

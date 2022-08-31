@@ -13,4 +13,6 @@ router.put('/kelas/partisipan/:id', controller.addPartisipan)
 router.put('/kelas/pengampu/:id', controller.addPengampu)
 router.put('/kelas/tugas/:id', controller.addTugas)
 
+// route for delete partisipan
+router.put('/kelas/partisipan/delete/:id', controller.deletePartisipan)
 module.exports = router
