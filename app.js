@@ -5,6 +5,7 @@ const cors = require('cors')
 require('dotenv').config()
 const route = require('./src/routes/route')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const DBconnect = require('./src/utils/dbConnect')
 
 // call DB
@@ -13,9 +14,14 @@ DBconnect()
 // allow origin
 app.use(cors())
 
-// return only json parse
+// middleware for json
 app.use(bodyParser.json())
+
+// middleware for handler urlencoded form data yess
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// middlerware for cookies
+app.use(cookieParser())
 
 // access route
 app.use('/api', route)

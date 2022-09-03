@@ -8,7 +8,6 @@ const encrypt = {
     return hash
   },
   comparePassword: (password, hashPassword) => {
-    console.log(password)
     const compare = bcrypt.compareSync(password, hashPassword)
     return compare
   }

@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const controller = require('../controllers/taskController')
+const verifyJWT = require('../middlewares/adminAuth')
 
-router.get('/task', controller.getTask)
-router.get('/task/:id', controller.getTaskById)
-router.post('/task', controller.addTask)
-router.put('/task/:id', controller.editTask)
-router.delete('/task/:id', controller.deleteTask)
+router.get('/task', verifyJWT.verifyAdmin, controller.getTask)
+router.get('/task/:id', verifyJWT.verifyAdmin, controller.getTaskById)
+router.post('/task', verifyJWT.verifyAdmin, controller.addTask)
+router.put('/task/:id', verifyJWT.verifyAdmin, controller.editTask)
+router.delete('/task/:id', verifyJWT.verifyAdmin, controller.deleteTask)
 
 module.exports = router

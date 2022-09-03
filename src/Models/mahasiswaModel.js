@@ -26,7 +26,11 @@ const mahasiswaSchema = new Schema({
   kelas: [{
     type: Schema.Types.ObjectId,
     ref: 'Kelas'
-  }]
+  }],
+  refreshToken: {
+    type: 'string',
+    default: null
+  }
 })
 const Mahasiswa = mongoose.model('Mahasiswa', mahasiswaSchema)
 
