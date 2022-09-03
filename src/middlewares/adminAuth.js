@@ -10,7 +10,6 @@ exports.verifyAdmin = (req, res, next) => {
   jwt.verify(
     token, process.env.ACCESS_TOKEN_SECRET,
     (err, decoded) => {
-      console.log(err)
       if (err) return res.status(403).json({ message: err })
       req.admin = decoded.nim
       next()
