@@ -4,7 +4,7 @@ require('dotenv').config()
 exports.verifyAdmin = (req, res, next) => {
   const authHeader = req.headers['authorization']
   if (!authHeader) {
-    return res.status(401).json({ message: 'error auth header' })
+    return res.status(401).json({ message: 'gagal request, periksa apakah anda sudah login' })
   }
   const token = authHeader.split(' ')[1]
   jwt.verify(

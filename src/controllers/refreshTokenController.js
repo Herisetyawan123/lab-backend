@@ -4,9 +4,8 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 exports.refreshToken = async (req, res) => {
-  const cookies = req.cookies
-  console.log(cookies)
   try {
+    const cookies = req.cookies
     if (!cookies?.jwt) {
       return res.sendStatus(401)
     }
