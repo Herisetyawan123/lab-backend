@@ -2,6 +2,8 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const corsOptions = require('./src/cors/corsOption')
+const credentials = require('./src/middlewares/credentials')
 require('dotenv').config()
 const route = require('./src/routes/route')
 const bodyParser = require('body-parser')
@@ -11,8 +13,10 @@ const DBconnect = require('./src/utils/dbConnect')
 // call DB
 DBconnect()
 
+app.use(credentials)
+
 // allow origin
-app.use(cors({ credentials: true }))
+app.use(cors(corsOptions))
 
 // middleware for json
 app.use(bodyParser.json())
