@@ -12,7 +12,7 @@ const DBconnect = require('./src/utils/dbConnect')
 DBconnect()
 
 // allow origin
-app.use(cors())
+app.use(cors({ credentials: true }))
 
 // middleware for json
 app.use(bodyParser.json())

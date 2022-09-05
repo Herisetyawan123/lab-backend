@@ -35,7 +35,7 @@ exports.loginAdmin = async (req, res) => {
       nim: login.nim
     }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' })
     const loginMahasiswa = await Mahasiswa.updateOne({ _id: login._id }, { $set: { refreshToken } })
-    res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
+    res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 })
     res.status(200).json({
       message: 'Login berhasil',
       accessToken
