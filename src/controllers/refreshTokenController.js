@@ -7,7 +7,9 @@ exports.refreshToken = async (req, res) => {
   try {
     const cookies = req.cookies
     if (!cookies?.jwt) {
-      return res.sendStatus(401)
+      return res.status(401).json({
+        message: 'Tidak memiliki token harap login dahulu'
+      })
     }
     const refreshToken = cookies.jwt
     const isRefreshToken = await Mahasiswa.findOne({ refreshToken: cookies.jwt })
